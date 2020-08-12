@@ -1,0 +1,183 @@
+package lista;
+
+/**
+ *
+ * @author Julian Ramos
+ */
+public class Nodo {
+    private Nodo siguiente;
+    private Persona dato;
+    
+    public Nodo(Persona dato,Nodo siguiente){
+        this.siguiente=siguiente;
+        this.dato=dato;
+        
+        
+    }
+
+   
+
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Persona getDato() {
+        return dato;
+    }
+
+    public void setDato(Persona dato) {
+        this.dato = dato;
+    }
+    
+    
+    
+}
+
+////////////////////////
+
+package lista;
+
+/**
+ *
+ * @author Julian Ramos
+ */
+public class Persona {
+    private String aNombre,aApellido;
+    private int aEdad;
+    
+    public Persona(String aNombre,String aApellido,int aEdad){
+        this.aNombre=aNombre;
+        this.aApellido=aApellido;
+        this.aEdad=aEdad;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "aNombre=" + aNombre + ", aApellido=" + aApellido + ", aEdad=" + aEdad + '}';
+    }
+    
+ 
+
+    public String getaNombre() {
+        return aNombre;
+    }
+
+    public void setaNombre(String aNombre) {
+        this.aNombre = aNombre;
+    }
+
+    public String getaApellido() {
+        return aApellido;
+    }
+
+    public void setaApellido(String aApellido) {
+        this.aApellido = aApellido;
+    }
+
+    public int getaEdad() {
+        return aEdad;
+    }
+
+    public void setaEdad(int aEdad) {
+        this.aEdad = aEdad;
+    }
+    
+    
+}
+
+/////////////////
+
+package lista;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Julian Ramos
+ */
+public class Lista {
+    private Nodo inicio;
+    private Nodo fin;
+    
+    
+    public Lista(){
+        inicio=null;
+        fin=null;
+    }
+    
+    public boolean estaVacia(){
+       if(inicio==null) {
+           return true;
+       }else{
+           return false;
+       }
+    }
+    
+    public void insertar(Persona persona){
+        Nodo actual;
+        if(estaVacia()){
+            actual=new Nodo(persona,null);
+            inicio=actual;
+            fin=actual;
+        }else{
+            actual=new Nodo(persona,null);
+            fin.setSiguiente(actual);
+            fin=actual;
+        }
+    }
+    
+     public void mostrar(){
+        if(estaVacia()){
+           JOptionPane.showMessageDialog(null,"La lista está vacia");
+            return;
+         
+        }else{
+          Nodo temporal;  
+          temporal=inicio;
+          while(temporal!=null){
+            JOptionPane.showMessageDialog(null,temporal.getDato().toString());
+        }
+        }
+    }
+    
+}
+
+///////////////////////////
+
+package lista;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Julian Ramos
+ */
+public class Ejecutar {
+    
+    public static void main(String[] args) {
+        Lista l = new Lista();
+        int op=0;
+        do{
+            String opcion = JOptionPane.showInputDialog(null,"Lista Simple 1.Insertar 2.Mostrar 3.Salir");
+            op=Integer.parseInt(opcion);
+            switch(op){
+                case 1:
+                {
+                    String nombre,apellido,annos;
+                    int edad;
+                    nombre=JOptionPane.showInputDialog(null,"Ingrese su nombre");
+                    apellido=JOptionPane.showInputDialog(null,"Ingrese su apellido");
+                    annos=JOptionPane.showInputDialog(null,"Ingrese su edad");
+                    edad= Integer.parseInt(annos);
+                    l.insertar(new Persona(nombre, apellido, edad));
+                    break;
+                }
+            }
+        }
+    }
+    
+}
